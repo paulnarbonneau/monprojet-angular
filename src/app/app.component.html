@@ -1,37 +1,46 @@
-<h1>Hello {{name}}</h1>
+<h1>Hello {{customer.name}}</h1>
 
-<p><i> {{name}} est dans la région {{region}}</i></p>
+<p><i> {{customer.name}} est dans la région {{customer.adress.region}},{{customer.adress.state}}</i></p>
 
 
 <br/>
 
 <fieldset>
     <label>Name :</label><br/>
-<input [value]="name"><br/>
+<input [value]="customer.name"><br/>
 <!-- Exemple de formulaire de style two-way binding 
     On met à jour la variable en meme temps que le champ est modifié
 -->
-<input  #namebox [value]="name" (input)='name = namebox.value'><br/>
+<input  #namebox [value]="customer.name" (input)='customer.name = namebox.value'><br/>
 <!-- Si on veut mettre à jour en temps réel -->
-<input   [value]="name" (input)='name = $event.target.value'><br/>
+<input   [value]="customer.name" (input)='name = $event.target.value'><br/>
 <!-- Si on veut mettre à jour en pressant la touche enter -->
-<input   [value]="name" (keyup.enter)='name = $event.target.value'><br/>
+<input   [value]="customer.name" (keyup.enter)='customer.name = $event.target.value'><br/>
 <!-- Si on veut mettre à jour en pressant la touche enter ou en sortant du champ -->
-<input   [value]="name" (keyup.enter)='name = $event.target.value' (blur)='name = $event.target.value'><br/>
+<input   [value]="customer.name" (keyup.enter)='customer.name = $event.target.value' (blur)='name = $event.target.value'><br/>
 <!-- Mise à jour en temps réel -->
-<input [(ngModel)]="name"><br/>
+<input [(ngModel)]="customer.name"><br/>
 <!-- Version décomposée de l'instruction précédente Mise à jour en temps réel -->
-<input [ngModel]="name" (ngModelChange)="name=$event"><br/>
+<input [ngModel]="customer.name" (ngModelChange)="customer.name=$event"><br/>
 </fieldset>
 <button (click)="adressClick()">Afficher/cacher Adresse</button>
 <label><input type="checkbox" [(ngModel)]="hideAdress"> HideAdress</label>
 <div [hidden]="hideAdress">
 <fieldset>
-  <label [style.color] = "color">Adresse : {{street}}</label>
+  <label [style.color] = "color">Adresse : {{customer.adress.street}}</label>
   </fieldset>
   <fieldset>
-  <label [style.color] = "color">Ville : {{city}}</label>
+  <label [style.color] = "color">Ville : {{customer.adress.city}}</label>
   </fieldset>
+  <fieldset>
+    <select [(ngModel)]="customer.adress.state">
+      <option>France</option>
+      <option>Italie</option>
+      <option>Espagne</option>
+      <option>Angleterre</option>
+    </select>
+  </fieldset>
+
   <fieldset>
   <select (change)="regionChanged($event.target.value)">
     <option>Est</option>
