@@ -3,8 +3,11 @@ import { Component } from '@angular/core';
 import { Customer } from './model';
 
 @Component({
+  // A renseigner pour dire que la resolution d'url est relative à ce module
+  moduleId : module.id,
   selector: 'mon-app',
-  templateUrl: './app.component.html',
+  templateUrl: 'app.component.html',
+  styleUrls : ['app.component.css']
 })
 export class AppComponent  { 
   
