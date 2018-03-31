@@ -1,46 +1,63 @@
-<h1>Hello {{customer.name}}</h1>
+<h1>Customers</h1>
+<div>
+  <!-- liste ici  -->
+  <p>Select a customer</p>
+  <ul>
+    <li *ngFor="let cust of customers" [ngClass]="{selected : customer===cust}" (click)="customer = cust">{{cust.name}}</li>
+  </ul>
 
-<p><i> {{customer.name}} est dans la région {{customer.adress.region}},{{customer.adress.state}}</i></p>
+  <!-- détails ici  -->
+  <div *ngIf="customer">
+    <h1>Hello {{customer.name}}</h1>
+
+    <p>
+      <i> {{customer.name}} est dans la région {{customer.address.region}},{{customer.address.state}}</i>
+    </p>
 
 
-<br/>
+    <br/>
 
-<fieldset>
-    <label>Name :</label><br/>
-<input [value]="customer.name"><br/>
-<!-- Exemple de formulaire de style two-way binding 
-    On met à jour la variable en meme temps que le champ est modifié
--->
-<input  #namebox [value]="customer.name" (input)='customer.name = namebox.value'><br/>
-<!-- Si on veut mettre à jour en temps réel -->
-<input   [value]="customer.name" (input)='name = $event.target.value'><br/>
-<!-- Si on veut mettre à jour en pressant la touche enter -->
-<input   [value]="customer.name" (keyup.enter)='customer.name = $event.target.value'><br/>
-<!-- Si on veut mettre à jour en pressant la touche enter ou en sortant du champ -->
-<input   [value]="customer.name" (keyup.enter)='customer.name = $event.target.value' (blur)='name = $event.target.value'><br/>
-<!-- Mise à jour en temps réel -->
-<input [(ngModel)]="customer.name"><br/>
-<!-- Version décomposée de l'instruction précédente Mise à jour en temps réel -->
-<input [ngModel]="customer.name" (ngModelChange)="customer.name=$event"><br/>
-</fieldset>
-<button (click)="adressClick()">Afficher/cacher Adresse</button>
-<label><input type="checkbox" [(ngModel)]="hideAdress"> HideAdress</label>
-<div [hidden]="hideAdress">
-<fieldset>
-  <label [style.color] = "color">Adresse : {{customer.adress.street}}</label>
-  </fieldset>
-  <fieldset>
-  <label [style.color] = "color">Ville : {{customer.adress.city}}</label>
-  </fieldset>
-  <fieldset>
-    <select [(ngModel)]="customer.adress.state">
-      <option>France</option>
-      <option>Italie</option>
-      <option>Espagne</option>
-      <option>Angleterre</option>
-    </select>
-  </fieldset>
+    <fieldset>
+      <!-- Input simple sans maj
+      <label>Name :</label><br/>
+  <input [value]="customer.name"><br/>-->
+      <!-- Exemple de formulaire de style two-way binding 
+      On met à jour la variable en meme temps que le champ est modifié
 
+  <input  #namebox [value]="customer.name" (input)='customer.name = namebox.value'><br/>-->
+      <!-- Si on veut mettre à jour en temps réel 
+  <input   [value]="customer.name" (input)='name = $event.target.value'><br/>-->
+      <!-- Si on veut mettre à jour en pressant la touche enter 
+  <input   [value]="customer.name" (keyup.enter)='customer.name = $event.target.value'><br/>-->
+      <!-- Si on veut mettre à jour en pressant la touche enter ou en sortant du champ -
+  <input   [value]="customer.name" (keyup.enter)='customer.name = $event.target.value' (blur)='name = $event.target.value'><br/>-->
+
+      <!-- Mise à jour en temps réel -->
+      <input [(ngModel)]="customer.name">
+      <br/>
+
+      <!-- Version décomposée de l'instruction précédente Mise à jour en temps réel 
+  <input [ngModel]="customer.name" (ngModelChange)="customer.name=$event"><br/>-->
+
+    </fieldset>
+    <button (click)="addressClick()">Afficher/cacher Adresse</button>
+    <label>
+      <input type="checkbox" [(ngModel)]="showAddress"> HideAddress</label>
+      <!-- Il faut préférer la solution ngIf plutot que la property hidden car hidden cache le div à l'écran mais ne cache pas le contenu du div dans le DOM -->
+      <!-- Le ngIf n'envoie pas le contenu si la property n'est pas true -->
+    <div *ngIf="showAddress">
+      <fieldset>
+        <label [style.color]="color">Adresse : {{customer.address.street}}</label>
+      </fieldset>
+      <fieldset>
+        <label [style.color]="color">Ville : {{customer.address.city}}</label>
+      </fieldset>
+      <fieldset>
+        <select [(ngModel)]="customer.address.state">
+          <option *ngFor="let state of states">{{state}}</option>
+        </select>
+      </fieldset>
+      <!--
   <fieldset>
   <select (change)="regionChanged($event.target.value)">
     <option>Est</option>
@@ -48,23 +65,32 @@
     <option>Nord</option>
     <option>Sud</option>
   </select>
-</fieldset>
-</div>
+</fieldset>-->
+      <fieldset>
+        <select [(ngModel)]="customer.address.region">
+          <option *ngFor="let region of regions">{{region}}</option>
+        </select>
+      </fieldset>
+    </div>
 
 
-
+    <!--
 <fieldset>
     <img [src]="image"/>
   </fieldset>
   <label [style.color] = "color">Couleur préférée : </label>
   <br/>
   <button (click)="clicked()">Changer Couleur</button>
-  <!-- Methode possible avec le #selector
+  // Methode possible avec le #selector
   <select #selector (change)="changeColor(selector.value)" >
-  -->
+  
   <select (change)="changeColor($event.target.value)" >
     <option>red</option>
     <option>purple</option>
     <option>blue</option>
     <option>green</option>
   </select>
+  -->
+
+  </div>
+</div>

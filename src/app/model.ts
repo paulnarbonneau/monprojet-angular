@@ -2,11 +2,11 @@ export class Customer
 {
     id : number;
     name : string;
-    adress : Adress;
+    address : Address;
 
 }
 
-export class Adress{
+export class Address{
     
     city : string;
     street : string;
