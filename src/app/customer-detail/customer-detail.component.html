@@ -1,5 +1,9 @@
 <!-- détails ici  -->
-<h1>Hello {{customer.name}}</h1>
+<h1>
+  <button (click)="left()">
+    <</button>Hello {{customer.name}}
+      <button (click)="right()">></button>
+</h1>
 
 <p>
   <i> {{customer.name}} est dans la région {{customer.address.region}},{{customer.address.state}}</i>

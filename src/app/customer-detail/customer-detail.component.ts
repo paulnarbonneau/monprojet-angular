@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Customer } from '../model';
 
@@ -22,6 +22,8 @@ export class CustomerDetailComponent  {
 // va planter dans un premier temps si il n'est pas initialisé, il faut faire un ngIf pour verifier qu'il est initialisé
 // La notation Input sert à montrer que la propriete peut etre settée dans la balise html appelant ce composant
 @Input() customer : Customer ;// = this.customers[0];
+
+@Output() shift  = new EventEmitter<number>();
   
   // On peut utiliser une notation java avec new + constructeur 
   // customer : Customer = new Customer();
@@ -44,5 +46,14 @@ export class CustomerDetailComponent  {
   addressClick() { this.showAddress = !this.showAddress ;}
   //regionChanged(region : string) { this.customer.address.region = region;}
   //nameChanged(name : string) { this.customer.name = name;}
+
+  left(){
+    this.shift.emit(-1);
+  }
+
+  right()
+  {
+    this.shift.emit(1);
+  }
 
 }
