@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Customer } from './model';
+import { Customer } from '../model';
 
 @Component({
   // A renseigner pour dire que la resolution d'url est relative à ce module
@@ -9,7 +9,7 @@ import { Customer } from './model';
   templateUrl: 'customer-list.component.html',
   styleUrls : ['customer-list.component.css']
 })
-export class AppComponent  { 
+export class CustomerListComponent  { 
   
   //image = 'favicon.ico';
   //color = 'blue';

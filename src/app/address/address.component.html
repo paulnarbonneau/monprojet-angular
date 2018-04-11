@@ -1,0 +1,25 @@
+<fieldset>
+    <label [style.color]="color">Adresse : {{address.street}}</label>
+  </fieldset>
+  <fieldset>
+    <label [style.color]="color">Ville : {{address.city}}</label>
+  </fieldset>
+  <fieldset>
+    <select [(ngModel)]="address.state">
+      <option *ngFor="let state of states">{{state}}</option>
+    </select>
+  </fieldset>
+  <!--
+<fieldset>
+<select (change)="regionChanged($event.target.value)">
+  <option>Est</option>
+  <option>Ouest</option>
+  <option>Nord</option>
+  <option>Sud</option>
+</select>
+</fieldset>-->
+  <fieldset>
+    <select [(ngModel)]="address.region">
+      <option *ngFor="let region of regions">{{region}}</option>
+    </select>
+  </fieldset>

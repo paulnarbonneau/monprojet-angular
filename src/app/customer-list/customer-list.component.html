@@ -1,0 +1,13 @@
+<h1>Customers</h1>
+<div>
+  <!-- liste ici  -->
+  <p>Select a customer</p>
+  <ul>
+    <li *ngFor="let cust of customers" [ngClass]="{selected : customer===cust}" (click)="customer = cust">{{cust.name}}</li>
+  </ul>
+
+  <!-- détails ici  -->
+  <div *ngIf="customer">
+    <customer-detail [customer]="customer"></customer-detail>
+  </div>
+</div>
