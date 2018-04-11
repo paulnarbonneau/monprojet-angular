@@ -7,11 +7,14 @@ import { AppComponent }  from './app.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { AddressComponent } from './address/address.component';
+import { DataService } from './service/data.service';
+import { LoggerService } from './service/logger.service';
 
 // decorator qui sert de metadata pour décrire la classe 
 @NgModule({
   imports:      [ BrowserModule, FormsModule ], // de quoi j'ai besoin
   declarations: [ AppComponent, CustomerListComponent, CustomerDetailComponent, AddressComponent ], // de quoi est composée mon app
+  providers : [ DataService, LoggerService ], // services dont j'ai besoin
   bootstrap:    [ AppComponent ] // ou je demarre
 })
 export class AppModule { }
