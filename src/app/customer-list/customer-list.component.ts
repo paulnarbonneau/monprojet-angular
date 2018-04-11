@@ -14,15 +14,15 @@ import { LoggerService } from '../service/logger.service';
 })
 export class CustomerListComponent implements OnInit { 
 
+  
 
   constructor(private dataService : DataService, private loggerService : LoggerService){}
 
   //Cycle de vie du composant commence ici
   ngOnInit(){
-
-    this.loggerService.log("Getting customers ...");
-    this.customers = this.dataService.getCustomers();
+    this.getCustomers();
   }
+
   
   //image = 'favicon.ico';
   //color = 'blue';
@@ -33,9 +33,9 @@ export class CustomerListComponent implements OnInit {
 
   states = ['California', 'Illinois','Quebec','Jalisco']
 
-  customers: Customer[] = [
-    
-];
+  customers: Customer[] = [];
+
+  isBusy = false;
 
 // va planter dans un premier temps si il n'est pas initialisé, il faut faire un ngIf pour verifier qu'il est initialisé
 customer : Customer ;// = this.customers[0];
@@ -68,4 +68,17 @@ customer : Customer ;// = this.customers[0];
     ix = Math.min(this.customers.length -1 , Math.max(0,ix));
     this.customer = this.customers[ix];
   }
+
+    
+  getCustomers(){
+    
+    this.isBusy = true;
+    this.loggerService.log("Getting customers ...");
+
+   // this.customers = this.dataService.getCustomers();
+   this.dataService.getCustomersByPromise().then(custs => { 
+     this.isBusy = false;
+     this.customers = custs;
+    });
+}
 }
