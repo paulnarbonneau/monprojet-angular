@@ -76,8 +76,8 @@ customer : Customer ;// = this.customers[0];
     this.loggerService.log("Getting customers ...");
 
    // this.customers = this.dataService.getCustomers();
-   //this.dataService.getCustomersByPromise().then(custs => { 
-   this.dataService.getCustomers().subscribe(custs => { 
+   this.dataService.getCustomersByPromise().then(custs => { 
+   //this.dataService.getCustomers().subscribe(custs => { 
      this.isBusy = false;
      this.customers = custs;
     });
