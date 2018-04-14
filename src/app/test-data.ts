@@ -43,3 +43,13 @@ export function createTestCustomers()
           }
     ];
 }
+
+export function createTestStates()
+{
+  return ['California', 'Illinois','Quebec','Jalisco'];
+}
+
+export function createTestRegions()
+{
+  return ['West','North','East','South','Midwest'];
+}

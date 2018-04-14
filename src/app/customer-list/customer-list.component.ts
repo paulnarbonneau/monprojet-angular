@@ -29,11 +29,10 @@ export class CustomerListComponent implements OnInit {
   
   showAddress = false;
 
-  regions = ['West','Noth','East','South','Midwest'];
-
-  states = ['California', 'Illinois','Quebec','Jalisco']
 
   customers: Customer[] = [];
+  states : string[];
+  regions : string[];
 
   isBusy = false;
 
@@ -76,10 +75,18 @@ customer : Customer ;// = this.customers[0];
     this.loggerService.log("Getting customers ...");
 
    // this.customers = this.dataService.getCustomers();
-   this.dataService.getCustomersByPromise().then(custs => { 
-   //this.dataService.getCustomers().subscribe(custs => { 
+  //  this.dataService.getCustomersByPromise().then(custs => { 
+   this.dataService.getCustomers().subscribe(custs => { 
      this.isBusy = false;
      this.customers = custs;
+    }, (errorMsg : string) => 
+    {
+      this.isBusy = false;
+      alert(errorMsg);
     });
 }
+
+
+
+
 }
